@@ -1,0 +1,60 @@
+<div class="home-container">
+  <!-- Live Price Card -->
+  <div class="price-card">
+    <h2>Live Gold Prices</h2>
+    <div class="price-grid">
+      <div class="price-item">
+        <h3>22K Gold</h3>
+        <p class="price">₹{{ currentPrice?.price22K }}</p>
+      </div>
+      <div class="price-item">
+        <h3>24K Gold</h3>
+        <p class="price">₹{{ currentPrice?.price24K }}</p>
+      </div>
+    </div>
+    <p class="last-updated">Last updated: {{ currentPrice?.date | date:'medium' }}</p>
+  </div>
+
+  <!-- Price History Chart -->
+  <div class="chart-card">
+    <h2>30-Day Price History</h2>
+    <ngx-charts-line-chart
+      [view]="chartOptions.view"
+      [scheme]="chartOptions.colorScheme"
+      [results]="chartData"
+      [gradient]="chartOptions.gradient"
+      [xAxis]="chartOptions.showXAxis"
+      [yAxis]="chartOptions.showYAxis"
+      [legend]="chartOptions.showLegend"
+      [showXAxisLabel]="chartOptions.showXAxisLabel"
+      [showYAxisLabel]="chartOptions.showYAxisLabel"
+      [xAxisLabel]="chartOptions.xAxisLabel"
+      [yAxisLabel]="chartOptions.yAxisLabel">
+    </ngx-charts-line-chart>
+  </div>
+
+  <!-- Daily Prices Table -->
+  <div class="table-card">
+    <h2>Daily Price Changes</h2>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Today's Price</th>
+          <th>Change</th>
+          <th>Expected Tomorrow</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let price of dailyPrices">
+          <td>{{ price.date | date:'mediumDate' }}</td>
+          <td>₹{{ price.price22K }}</td>
+          <td [ngClass]="price.change >= 0 ? 'price-increase' : 'price-decrease'">
+            {{ price.change > 0 ? '+' : '' }}{{ price.change }}
+          </td>
+          <td>₹{{ price.expectedTomorrow }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
