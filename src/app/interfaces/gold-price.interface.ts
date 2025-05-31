@@ -5,11 +5,33 @@ export interface LivePrice {
 }
 
 export interface GoldPrice {
-  date: Date;
-  price22K: number;
-  price24K: number;
-  change: number;
-  expectedTomorrow: number;
+  _id?: string;
+  category?: string;
+  humanReadableDate?: string;
+  type?: string;
+  __v?: number;
+  changeEightGram?: number;
+  changeOneGram?: number;
+  createdDate?: string;
+  date: Date | string;
+  modifiedDate?: string;
+  priceEightGram?: number;
+  priceOneGram?: number;
+  refreshedAt?: string;
+  price22K?: number;
+  price24K?: number;
+  change?: number;
+  expectedTomorrow?: number;
+  formattedDate?: string;
+}
+
+export interface GoldPriceApiResponse {
+  status: boolean;
+  data: {
+    currentGoldPrice: GoldPrice;
+    goldPriceBarChart: GoldPrice[];
+    dailyPrice: GoldPrice[];
+  };
 }
 
 export interface DailyPrice {

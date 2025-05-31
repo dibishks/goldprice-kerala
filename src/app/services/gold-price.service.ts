@@ -1,62 +1,51 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { GoldPrice } from '../interfaces/gold-price.interface';
+import { Observable, map } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { GoldPrice, GoldPriceApiResponse } from '../interfaces/gold-price.interface';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoldPriceService {
-  // Mock data - You can modify these prices
-  private mockPrices: GoldPrice[] = [
-    {
-      date: new Date('2024-03-20'),
-      price22K: 6500,
-      price24K: 7100,
-      change: 50,
-      expectedTomorrow: 6550
-    },
-    {
-      date: new Date('2024-03-19'),
-      price22K: 6450,
-      price24K: 7050,
-      change: -30,
-      expectedTomorrow: 6500
-    },
-    {
-      date: new Date('2024-03-18'),
-      price22K: 6480,
-      price24K: 7080,
-      change: 20,
-      expectedTomorrow: 6450
-    }
-  ];
+  private headers = new HttpHeaders({
+    'promise': 'z1eDDPTpIU4g4GBXm6ZWRfMKDoUGPYnoLIx'
+  });
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   // Get current prices
   getCurrentPrices(): Observable<GoldPrice> {
-    return of(this.mockPrices[0]);
+    return this.http.get<GoldPriceApiResponse>(`${environment.apiUrl}/list-price`, { headers: this.headers })
+      .pipe(
+        map(response => response.data.currentGoldPrice)
+      );
   }
 
-  // Get price history
+  // Get price history for bar chart
   getPriceHistory(): Observable<GoldPrice[]> {
-    const history: GoldPrice[] = Array.from({ length: 30 }, (_, i) => {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-      const basePrice = 6500 + Math.floor(Math.random() * 200) - 100;
-      return {
-        date,
-        price22K: basePrice,
-        price24K: Math.round(basePrice * 1.1),
-        change: Math.floor(Math.random() * 100) - 50,
-        expectedTomorrow: basePrice + Math.floor(Math.random() * 50) - 25
-      };
-    });
-    return of(history);
+    return this.http.get<GoldPriceApiResponse>(`${environment.apiUrl}/list-price`, { headers: this.headers })
+      .pipe(
+        map(response => {
+          return response.data.goldPriceBarChart.map(price => ({
+            ...price,
+            date: new Date(price.date),
+            formattedDate: this.formatDate(new Date(price.date))
+          }));
+        })
+      );
   }
 
   // Get daily prices
   getDailyPrices(): Observable<GoldPrice[]> {
-    return of(this.mockPrices);
+    return this.http.get<GoldPriceApiResponse>(`${environment.apiUrl}/list-price`, { headers: this.headers })
+      .pipe(
+        map(response => response.data.dailyPrice)
+      );
+  }
+
+  private formatDate(date: Date): string {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[date.getMonth()]} ${date.getDate()}`;
   }
 } 

@@ -11,11 +11,11 @@
 
 // Live Price Tile
 .price-card {
-  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
   border-radius: 16px;
   padding: 2rem;
-  color: white;
-  box-shadow: 0 4px 20px rgba(26, 35, 126, 0.2);
+  color: #1a237e;
+  box-shadow: 0 4px 20px rgba(187, 222, 251, 0.3);
   transition: transform 0.3s ease;
   width: 100%;
 
@@ -27,8 +27,8 @@
     margin: 0 0 1.5rem 0;
     font-size: 1.8rem;
     text-align: center;
-    color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #1a237e;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
   .price-grid {
@@ -40,14 +40,15 @@
 
   .price-item {
     text-align: center;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.7);
     padding: 1.5rem;
     border-radius: 12px;
     backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
     h3 {
       margin: 0;
-      color: rgba(255, 255, 255, 0.9);
+      color: #1a237e;
       font-size: 1.3rem;
     }
 
@@ -55,18 +56,62 @@
       font-size: 2.5rem;
       font-weight: 600;
       margin: 0.5rem 0;
-      color: white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      color: #1a237e;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
   }
 
   .last-updated {
     text-align: center;
-    color: rgba(255, 255, 255, 0.8);
+    color: #1a237e;
     font-size: 0.9rem;
     margin: 0;
     padding-top: 1rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(26, 35, 126, 0.1);
+  }
+
+  .price-label {
+    color: #757575;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .price-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #212121;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-change {
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+  }
+
+  .price-increase {
+    color: #388e3c;
+  }
+  .price-decrease {
+    color: #d32f2f;
+  }
+
+  .last-updated-bar {
+    background: #f0f6ff;
+    color: #222;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 0 0 12px 12px;
+    margin: 0 -2rem -2rem -2rem;
+    border-top: 1px solid #ffe082;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.04);
+    text-align: left;
   }
 }
 
@@ -90,10 +135,49 @@
     text-align: center;
   }
 
-  ngx-charts-line-chart {
-    display: block;
-    height: 400px;
+  .chart-container {
     width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+
+    ::ng-deep {
+      .ngx-charts {
+        min-width: 900px;
+        width: 100% !important;
+        height: 100% !important;
+      }
+    }
+  }
+
+  .chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: #424242;
+
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 2px;
+        display: inline-block;
+      }
+    }
   }
 }
 
@@ -117,18 +201,26 @@
     text-align: center;
   }
 
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -2rem;
+    padding: 0 2rem;
+  }
+
   .price-table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
     margin-top: 1rem;
-    overflow-x: auto;
-    display: block;
+    min-width: 600px;
 
     th, td {
       padding: 1.2rem;
       text-align: left;
       white-space: nowrap;
+      vertical-align: middle;
     }
 
     th {
@@ -136,6 +228,9 @@
       color: #1a237e;
       border-bottom: 2px solid #e0e0e0;
       background: #f8f9fa;
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
 
     td {
@@ -150,24 +245,19 @@
     tr:hover td {
       background: #f8f9fa;
     }
-  }
-}
 
-.price-increase {
-  color: #4caf50;
-  font-weight: 600;
-  &::before {
-    content: '↑';
-    margin-right: 4px;
-  }
-}
-
-.price-decrease {
-  color: #f44336;
-  font-weight: 600;
-  &::before {
-    content: '↓';
-    margin-right: 4px;
+    th:nth-child(1), td:nth-child(1) {
+      min-width: 120px;
+    }
+    th:nth-child(2), td:nth-child(2) {
+      min-width: 120px;
+    }
+    th:nth-child(3), td:nth-child(3) {
+      min-width: 100px;
+    }
+    th:nth-child(4), td:nth-child(4) {
+      min-width: 150px;
+    }
   }
 }
 
@@ -186,16 +276,32 @@
     gap: 1rem;
   }
 
-  .chart-card {
-    ngx-charts-line-chart {
-      height: 300px;
-    }
+  .chart-container {
+    height: 300px;
+    min-width: 0;
+    overflow-x: visible;
+    overflow-y: visible;
   }
 
-  .price-table {
-    th, td {
-      padding: 0.75rem;
-      font-size: 0.9rem;
+  .chart-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .table-card {
+    padding: 1rem;
+
+    .table-responsive {
+      margin: 0 -1rem;
+      padding: 0 1rem;
+    }
+
+    .price-table {
+      th, td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
     }
   }
 
@@ -222,8 +328,30 @@
   }
 
   .chart-card {
-    ngx-charts-line-chart {
+    padding: 1rem;
+
+    .chart-container {
       height: 250px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  .table-card {
+    padding: 0.75rem;
+
+    .table-responsive {
+      margin: 0 -0.75rem;
+      padding: 0 0.75rem;
+    }
+
+    .price-table {
+      th, td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+      }
     }
   }
 }
