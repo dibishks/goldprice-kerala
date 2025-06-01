@@ -141,17 +141,67 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: hidden;
     min-width: 0;
     position: relative;
     z-index: 1;
 
+    .custom-tooltip {
+      position: fixed;
+      background-color: #1a237e;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transform: translate(-50%, -120%);
+      margin-top: -10px;
+      white-space: nowrap;
+    }
+
     ::ng-deep {
       .ngx-charts {
-        min-width: 900px;
         width: 100% !important;
         height: 100% !important;
+      }
+
+      .tooltip-anchor {
+        fill: #1a237e;
+      }
+
+      .tooltip-box {
+        fill: #1a237e;
+        stroke: #1a237e;
+        stroke-width: 1;
+        rx: 4;
+        ry: 4;
+      }
+
+      .tooltip-label {
+        fill: white;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .tooltip {
+        background-color: #1a237e !important;
+        border: none !important;
+        border-radius: 4px !important;
+        padding: 8px 12px !important;
+        color: white !important;
+        font-size: 12px !important;
+        font-weight: 500 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+      }
+
+      @media (max-width: 768px) {
+        .ngx-charts {
+          min-width: 100% !important;
+          max-width: 100% !important;
+        }
       }
     }
   }
@@ -203,10 +253,8 @@
 
   .table-responsive {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
-    margin: 0 -2rem;
-    padding: 0 2rem;
   }
 
   .price-table {
@@ -214,12 +262,10 @@
     border-collapse: separate;
     border-spacing: 0;
     margin-top: 1rem;
-    min-width: 600px;
 
     th, td {
       padding: 1.2rem;
       text-align: left;
-      white-space: nowrap;
       vertical-align: middle;
     }
 
@@ -236,6 +282,16 @@
     td {
       color: #424242;
       border-bottom: 1px solid #e0e0e0;
+
+      &.price-increase {
+        color: #388e3c;
+        font-weight: 500;
+      }
+
+      &.price-decrease {
+        color: #d32f2f;
+        font-weight: 500;
+      }
     }
 
     tr:last-child td {
@@ -244,19 +300,6 @@
 
     tr:hover td {
       background: #f8f9fa;
-    }
-
-    th:nth-child(1), td:nth-child(1) {
-      min-width: 120px;
-    }
-    th:nth-child(2), td:nth-child(2) {
-      min-width: 120px;
-    }
-    th:nth-child(3), td:nth-child(3) {
-      min-width: 100px;
-    }
-    th:nth-child(4), td:nth-child(4) {
-      min-width: 150px;
     }
   }
 }
@@ -293,14 +336,26 @@
     padding: 1rem;
 
     .table-responsive {
-      margin: 0 -1rem;
-      padding: 0 1rem;
+      margin: 0;
+      padding: 0;
     }
 
     .price-table {
       th, td {
         padding: 0.75rem;
         font-size: 0.9rem;
+        white-space: normal;
+        word-break: break-word;
+      }
+
+      th:nth-child(1), td:nth-child(1) {
+        width: 40%;
+      }
+      th:nth-child(2), td:nth-child(2) {
+        width: 35%;
+      }
+      th:nth-child(3), td:nth-child(3) {
+        width: 25%;
       }
     }
   }
@@ -343,14 +398,24 @@
     padding: 0.75rem;
 
     .table-responsive {
-      margin: 0 -0.75rem;
-      padding: 0 0.75rem;
+      margin: 0;
+      padding: 0;
     }
 
     .price-table {
       th, td {
         padding: 0.5rem;
         font-size: 0.85rem;
+      }
+
+      th:nth-child(1), td:nth-child(1) {
+        width: 40%;
+      }
+      th:nth-child(2), td:nth-child(2) {
+        width: 35%;
+      }
+      th:nth-child(3), td:nth-child(3) {
+        width: 25%;
       }
     }
   }

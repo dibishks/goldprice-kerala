@@ -5,7 +5,14 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 ## Development server
 
 To start a local development server, run:
+Run ng serve or ng serve --configuration=development
+It will use environment.ts with the localhost URL
 
+```bash
+ng serve
+```
+Production setup 
+Run ng build --configuration=production
 ```bash
 ng serve
 ```
