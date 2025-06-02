@@ -2,7 +2,7 @@
   <!-- Live Price Card -->
   <div class="price-card">
     <h2>Today's Gold Price</h2>
-    <div class="price-grid">
+    <div class="price-grid" *ngIf="!isLoading.currentPrice">
       <div class="price-item">
         <div class="price-label">22K Gold (1 gram)</div>
         <div class="price-value">
@@ -26,7 +26,10 @@
         </div>
       </div>
     </div>
-    <div class="last-updated-bar">
+    <div class="loading-container" *ngIf="isLoading.currentPrice">
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="last-updated-bar" *ngIf="!isLoading.currentPrice">
       Last updated: {{ currentGoldPrice?.date | date:'MMM d yyyy h a' }}
     </div>
   </div>
@@ -34,7 +37,7 @@
   <!-- Price History Chart -->
   <div class="chart-card">
     <h2>7-Day Gold Price Tracker (1 Pavan)</h2>
-    <div class="chart-container" #chartContainer (mouseleave)="onMouseLeave($event)">
+    <div class="chart-container" #chartContainer (mouseleave)="onMouseLeave($event)" *ngIf="!isLoading.priceHistory">
       <ngx-charts-bar-vertical
         [view]="[chartWidth, chartOptions.view[1]]"
         [scheme]="chartOptions.colorScheme"
@@ -59,7 +62,10 @@
         {{ tooltipContent }}
       </div>
     </div>
-    <div class="chart-legend">
+    <div class="loading-container" *ngIf="isLoading.priceHistory">
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="chart-legend" *ngIf="!isLoading.priceHistory">
       <div class="legend-item">
         <span class="legend-color" style="background: #f44336"></span>
         <span>Highest Price</span>
@@ -78,7 +84,7 @@
   <!-- Daily Prices Table -->
   <div class="table-card">
     <h2>Gold Prices (1 gram) - Last 30 Days</h2>
-    <div class="table-responsive">
+    <div class="table-responsive" *ngIf="!isLoading.dailyPrices">
       <table class="price-table">
         <thead>
           <tr>
@@ -97,6 +103,9 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="loading-container" *ngIf="isLoading.dailyPrices">
+      <div class="loading-spinner"></div>
     </div>
   </div>
 </div>

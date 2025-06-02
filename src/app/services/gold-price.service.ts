@@ -16,7 +16,7 @@ export class GoldPriceService {
 
   // Get current prices
   getCurrentPrices(): Observable<GoldPrice> {
-    return this.http.get<GoldPriceApiResponse>(`${environment.apiUrl}/list-price`, { headers: this.headers })
+    return this.http.get<GoldPriceApiResponse>(`${environment.apiUrl}/list-today-price`, { headers: this.headers })
       .pipe(
         map(response => response.data.currentGoldPrice)
       );
