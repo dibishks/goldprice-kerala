@@ -12,7 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
   template: `
     <header class="header">
       <div class="logo">
-        <span>Gold Price Kerala</span>
+        <a routerLink="/" class="logo-link">
+          <img src="assets/images/logo.png" alt="Gold Price Kerala Logo" class="logo-image">
+          <span class="logo-text">Gold Price Kerala</span>
+        </a>
       </div>
       <div class="spacer"></div>
       <nav class="nav-menu">
@@ -33,6 +36,25 @@ import { MatIconModule } from '@angular/material/icon';
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo-image {
+      height: 40px;
+      width: 40px;
+      margin-right: 2px;
+      object-fit: contain;
+    }
+
+    .logo-text {
       font-size: 1.5rem;
       font-weight: 500;
       letter-spacing: 1px;
@@ -70,7 +92,12 @@ import { MatIconModule } from '@angular/material/icon';
         padding: 1rem;
       }
 
-      .logo {
+      .logo-image {
+        height: 32px;
+        width: 32px;
+      }
+
+      .logo-text {
         font-size: 1.2rem;
       }
 
@@ -81,6 +108,16 @@ import { MatIconModule } from '@angular/material/icon';
           font-size: 0.9rem;
           padding: 0.4rem;
         }
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-text {
+        display: none;
+      }
+
+      .logo-image {
+        margin-right: 0;
       }
     }
   `]
