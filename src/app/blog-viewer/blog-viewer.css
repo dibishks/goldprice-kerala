@@ -1,0 +1,10 @@
+.blog-detail-container {
+  max-width: 740px; /* Match the content width of the listing page */
+  margin: 2rem auto; /* Center the content with vertical margin */
+  padding: 20px; /* Add padding on all sides */
+}
+
+/* Styles to override or supplement github-markdown-css if needed */
+/* For example, adjust font sizes, margins, or link colors */
+
+/* Removed :host ::ng-deep .markdown-body as padding is applied to the container */

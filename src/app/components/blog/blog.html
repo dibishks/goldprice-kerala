@@ -1,1 +1,32 @@
-<p>blog works!</p>
+<div class="blog-list-container">
+  <h1>Latest Articles</h1>
+
+  <div *ngIf="isLoading && displayBlogPosts.length === 0" class="loading-indicator">
+    Loading posts...
+  </div>
+
+  <div class="blog-post-list">
+    <a *ngFor="let post of displayBlogPosts" [routerLink]="['/blog', post.id]" class="blog-post-item">
+      <div class="post-content">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.description }}</p>
+        <!-- Add date/author/read time if available in index.json -->
+      </div>
+      <div *ngIf="post.thumbnail" class="post-thumbnail">
+        <img [src]="post.thumbnail" [alt]="post.title + ' thumbnail'">
+      </div>
+    </a>
+  </div>
+
+  <div *ngIf="!isLoading && hasMorePosts()" class="load-more-container">
+    <button (click)="loadMorePosts()">Load More</button>
+  </div>
+
+  <div *ngIf="isLoading && displayBlogPosts.length > 0" class="loading-indicator-more">
+    Loading more posts...
+  </div>
+
+  <div *ngIf="!isLoading && displayBlogPosts.length === 0" class="no-posts-message">
+    No blog posts found.
+  </div>
+</div>

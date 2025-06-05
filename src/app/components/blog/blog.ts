@@ -1,104 +1,82 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 interface BlogPost {
+  id: string;
   title: string;
-  date: string;
-  excerpt: string;
-  author: string;
+  description: string;
+  thumbnail?: string;
 }
 
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule],
-  template: `
-    <div class="blog-container">
-      <h1>Gold Market Insights</h1>
-      <div class="blog-grid">
-        <mat-card *ngFor="let post of blogPosts" class="blog-card">
-          <mat-card-header>
-            <mat-card-title>{{ post.title }}</mat-card-title>
-            <mat-card-subtitle>
-              {{ post.date }} | By {{ post.author }}
-            </mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{ post.excerpt }}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color="primary">Read More</button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .blog-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #333;
-    }
-
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-
-    .blog-card {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-
-      mat-card-content {
-        flex-grow: 1;
-      }
-
-      p {
-        color: #666;
-        line-height: 1.6;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .blog-container {
-        padding: 1rem;
-      }
-
-      .blog-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  `]
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterLink],
+  templateUrl: './blog.html',
+  styleUrls: ['./blog.css']
 })
-export class BlogComponent {
-  blogPosts: BlogPost[] = [
-    {
-      title: 'Understanding Gold Price Fluctuations in Kerala',
-      date: 'May 28, 2024',
-      author: 'John Doe',
-      excerpt: 'Learn about the factors that influence gold prices in Kerala and how to make informed investment decisions.'
-    },
-    {
-      title: 'The Impact of Global Markets on Local Gold Prices',
-      date: 'May 25, 2024',
-      author: 'Jane Smith',
-      excerpt: 'How international market trends affect gold prices in Kerala and what it means for local investors.'
-    },
-    {
-      title: 'Gold Investment Strategies for 2024',
-      date: 'May 20, 2024',
-      author: 'Mike Johnson',
-      excerpt: 'Expert insights on the best gold investment strategies for the current market conditions.'
+export class BlogComponent implements OnInit {
+  allBlogPosts: BlogPost[] = [];
+  displayBlogPosts: BlogPost[] = [];
+  postsPerPage = 5;
+  currentPage = 0; // Start at 0, will increment after loading the first page
+  isLoading = false;
+  indexFilePath = '/assets/blog/blog-index.json';
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.loadBlogIndex();
+  }
+
+  loadBlogIndex(): void {
+    this.isLoading = true;
+    this.http.get<BlogPost[]>(this.indexFilePath).subscribe({
+      next: (posts) => {
+        this.allBlogPosts = posts;
+        this.currentPage = 0; // Ensure current page is 0 for initial load
+        this.displayBlogPosts = []; // Clear any previous posts
+
+        // Load the first batch of posts directly after fetching index
+        const initialPosts = this.allBlogPosts.slice(0, this.postsPerPage);
+        this.displayBlogPosts = [...this.displayBlogPosts, ...initialPosts];
+        this.currentPage = 1; // Increment page counter after loading the first page
+
+        this.isLoading = false; // Set loading to false after initial posts are displayed
+      },
+      error: (error) => {
+        console.error('Error loading blog index:', error);
+        this.isLoading = false; // Set to false on error
+      }
+    });
+  }
+
+  loadMorePosts(): void {
+     // Prevent loading more if already loading or no more posts available
+    if (this.isLoading || !this.hasMorePosts()) {
+      return;
     }
-  ];
+
+    this.isLoading = true; // Indicate loading for subsequent batches
+
+    const startIndex = this.currentPage * this.postsPerPage;
+    const endIndex = startIndex + this.postsPerPage;
+    const newPosts = this.allBlogPosts.slice(startIndex, endIndex);
+
+    // Use a slight delay to allow loading indicator to show briefly
+    setTimeout(() => {
+      this.displayBlogPosts = [...this.displayBlogPosts, ...newPosts];
+      this.currentPage++;
+      this.isLoading = false; // Set isLoading to false after adding posts
+    }, 100);
+  }
+
+  hasMorePosts(): boolean {
+    // Check if there are still posts in allBlogPosts that haven't been displayed
+    return this.displayBlogPosts.length < this.allBlogPosts.length;
+  }
 }
