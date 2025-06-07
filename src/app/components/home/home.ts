@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { NgxChartsModule, ScaleType } from '@swimlane/ngx-charts';
 import { GoldPriceService } from '../../services/gold-price.service';
 import { GoldPrice } from '../../interfaces/gold-price.interface';
@@ -16,7 +17,7 @@ import { GoldPrice } from '../../interfaces/gold-price.interface';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, NgxChartsModule],
+  imports: [CommonModule, RouterModule, NgxChartsModule, FormsModule],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
 })
@@ -37,6 +38,17 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     priceHistory: false,
     dailyPrices: false,
   };
+
+  // Jewellery Price Calculator properties
+  jewelleryGramValue: number | null = null;
+  jewelleryMakingChargePercent: number | null = null;
+  jewelleryFinalAmount: number | null = null;
+  private gstPercent: number = 3; // Fixed GST percentage
+
+  // Gold Budget Calculator properties
+  budgetAmount: number | null = null;
+  budgetMakingChargePercent: number | null = null;
+  gramsYouCanBuy: number | null = null;
 
   @ViewChild('chartContainer', { static: false }) chartContainer!: ElementRef;
   chartOptions = {
@@ -198,6 +210,83 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     // Clean up any subscriptions if needed
+  }
+
+  // Jewellery Price Calculator Logic
+  calculateJewelleryPrice(): void {
+    // Check if inputs and gold price are available
+    if (this.jewelleryGramValue === null || this.jewelleryMakingChargePercent === null || !this.currentGoldPrice?.priceOneGram) {
+      this.jewelleryFinalAmount = null; // Reset output if inputs are invalid
+      console.warn('Please enter valid inputs and ensure current gold price is available.'); // Log warning
+      // Optionally provide user feedback in the UI
+      return;
+    }
+
+    const gramValue = this.jewelleryGramValue;
+    const makingChargePercent = this.jewelleryMakingChargePercent;
+    const goldPricePerGram = this.currentGoldPrice.priceOneGram;
+    const gstPercent = this.gstPercent;
+
+    // 1. Base Price
+    const basePrice = gramValue * goldPricePerGram;
+
+    // 2. Making Charge
+    const makingCharge = basePrice * (makingChargePercent / 100);
+
+    // 3. Taxable Amount
+    const taxableAmount = basePrice + makingCharge;
+
+    // 4. GST
+    const gstAmount = taxableAmount * (gstPercent / 100);
+
+    // 5. Final Total
+    this.jewelleryFinalAmount = taxableAmount + gstAmount;
+  }
+
+  // Gold Budget Calculator Logic
+  calculateGoldBudget(): void {
+    // Check if inputs and gold price are available
+    if (this.budgetAmount === null || this.budgetMakingChargePercent === null || !this.currentGoldPrice?.priceOneGram) {
+      this.gramsYouCanBuy = null; // Reset output if inputs are invalid
+      console.warn('Please enter valid inputs and ensure current gold price is available.'); // Log warning
+      // Optionally provide user feedback in the UI
+      return;
+    }
+
+    const budgetAmount = this.budgetAmount;
+    const makingChargePercent = this.budgetMakingChargePercent;
+    const goldPricePerGram = this.currentGoldPrice.priceOneGram;
+    const gstPercent = this.gstPercent;
+
+    // 1. Base Price (8 grams)
+    const basePrice = 8 * goldPricePerGram;
+
+    // 2. Making Charge
+    const makingCharge = basePrice * (makingChargePercent / 100);
+
+    // 3. Taxable Amount
+    const taxableAmount = basePrice + makingCharge;
+
+    // 4. GST
+    const gstAmount = taxableAmount * (gstPercent / 100);
+
+    // 5. Final Total for 8 grams
+    const finalPricePer8Grams = taxableAmount + gstAmount;
+
+    // Prevent division by zero if finalPricePer8Grams is 0
+    if (finalPricePer8Grams === 0) {
+      this.gramsYouCanBuy = 0; // Or null, depending on desired behavior
+      console.warn('Cannot calculate grams: Final price per 8 grams is zero.');
+      return;
+    }
+
+    // 6. Total Grams You Can Buy with Budget
+    this.gramsYouCanBuy = (budgetAmount / finalPricePer8Grams) * 8;
+
+    // Round the result to 2 decimal places
+    if (this.gramsYouCanBuy !== null) {
+      this.gramsYouCanBuy = parseFloat(this.gramsYouCanBuy.toFixed(2));
+    }
   }
 
   @HostListener('mousemove', ['$event'])

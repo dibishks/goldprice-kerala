@@ -30,8 +30,52 @@
       <div class="loading-spinner"></div>
     </div>
     <div class="last-updated-bar" *ngIf="!isLoading.currentPrice">
-      Last updated: {{ currentGoldPrice?.date | date:'MMM d yyyy h a' }}
+      Last updated: {{ currentGoldPrice?.refreshedAt | date:'MMM d yyyy h a' }}
     </div>
+  </div>
+
+  <!-- Calculator Section -->
+  <div class="calculator-section price-card">
+    <h2>Gold Calculators</h2>
+    <div class="price-grid">
+      <!-- Jewellery Price Calculator -->
+      <div class="calculator-card price-item">
+        <h3>Jewellery Price Calculator</h3>
+        <div class="input-group">
+          <label for="grams">Enter Grams</label>
+          <input id="grams" required type="number" placeholder="e.g., 8" [(ngModel)]="jewelleryGramValue">
+        </div>
+        <div class="input-group">
+          <label for="making-charge">Enter Making Charge (%)</label>
+          <input id="making-charge" required type="number" placeholder="e.g., 10" [(ngModel)]="jewelleryMakingChargePercent">
+        </div>
+        <button class="calculate-button" (click)="calculateJewelleryPrice()">Calculate</button>
+        <div *ngIf="jewelleryFinalAmount !== null" class="calculation-result">
+          <p>Final Price: ₹{{ jewelleryFinalAmount | number:'1.2-2' }}</p>
+        </div>
+      </div>
+
+
+      <!-- Gold Budget Calculator -->
+      <div class="calculator-card price-item">
+        <h3>Gold Budget Calculator</h3>
+        <div class="input-group">
+          <label for="budget">Enter Budget Amount</label>
+          <input id="budget" required type="number" placeholder="e.g., 100000" [(ngModel)]="budgetAmount">
+        </div>
+        <div class="input-group">
+          <label for="budget-making-charge">Enter Making Charge (%)</label>
+          <input id="budget-making-charge" required type="number" placeholder="e.g., 12" [(ngModel)]="budgetMakingChargePercent">
+        </div>
+        <button class="calculate-button" (click)="calculateGoldBudget()">Calculate</button>
+        <div *ngIf="gramsYouCanBuy !== null" class="calculation-result">
+          <p>Grams you can buy: {{ gramsYouCanBuy | number:'1.2-2' }} grams</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="disclaimer-text">Prices are calculated based on official GST rates (3%) as per government guidelines.</p>
+
   </div>
 
   <!-- Price History Chart -->
