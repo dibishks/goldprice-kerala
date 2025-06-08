@@ -1,5 +1,3 @@
-# Smart Gold Investment Strategies & Market Trends 💰
-
 Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down.
 
 ## 🧠 Why Invest in Gold?
