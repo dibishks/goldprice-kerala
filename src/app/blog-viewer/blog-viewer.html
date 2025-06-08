@@ -1,1 +1,40 @@
-<div class="markdown-body" [innerHTML]="blogContent"></div>
+<div class="blog-viewer-container">
+  <h1>{{ blogDetails?.title }}</h1>
+  <div class="blog-meta">
+    <div class="meta-left">
+      <span class="published-date">{{ blogDetails?.publishedDate | date:'mediumDate' }}</span>
+      <span class="read-time">5 min read</span>
+    </div>
+    <div class="meta-right">
+      <div class="clap-section">
+        <i class="material-icons">waving_hand</i>
+        <span class="clap-count">597</span>
+      </div>
+      <div class="comment-section">
+        <i class="material-icons">chat_bubble_outline</i>
+        <span class="comment-count">29</span>
+      </div>
+      <button class="share-icon-button" (click)="toggleSharePopup()">
+        <i class="material-icons">share</i>
+      </button>
+      <div class="share-popup" *ngIf="showSharePopup">
+        <ul>
+          <li (click)="copyLink()"><i class="material-icons">content_copy</i> Copy Link</li>
+          <li (click)="shareOnInstagram()"><i class="material-icons">photo_camera</i> Share to Instagram</li>
+          <li (click)="shareOnFacebook()"><i class="material-icons">facebook</i> Share to Facebook</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-content" [innerHTML]="blogContent"></div>
+
+  <div class="blog-tags-section" *ngIf="blogTags && blogTags.length > 0">
+    <h3>Tags:</h3>
+    <mat-chip-listbox>
+      <mat-chip-option *ngFor="let tag of blogTags" (click)="onTagClick(tag)">
+        {{ tag }}
+      </mat-chip-option>
+    </mat-chip-listbox>
+  </div>
+</div>

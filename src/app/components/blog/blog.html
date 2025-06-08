@@ -1,19 +1,48 @@
 <div class="blog-list-container">
   <h1>Latest Articles</h1>
 
+  <div class="filters-section">
+    <div class="filter-group">
+      <h3>Categories:</h3>
+      <mat-chip-listbox [value]="selectedCategory" (selectionChange)="onCategoryListboxChange($event)">
+        <mat-chip-option *ngFor="let category of uniqueCategories" [value]="category">
+          {{ category }}
+        </mat-chip-option>
+        <mat-chip-option *ngIf="selectedCategory" value="null" (click)="filterByCategory(null)">
+          Clear Category
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+
+    <button mat-stroked-button color="primary" (click)="filterByCategory(null); filterByTag(null)" *ngIf="selectedCategory || selectedTag">
+      Clear All Filters
+    </button>
+  </div>
+
   <div *ngIf="isLoading && displayBlogPosts.length === 0" class="loading-indicator">
     Loading posts...
   </div>
 
   <div class="blog-post-list">
     <a *ngFor="let post of displayBlogPosts" [routerLink]="['/blog', post.id]" class="blog-post-item">
+      <div class="post-thumbnail" *ngIf="post.thumbnail">
+        <img [src]="post.thumbnail" [alt]="post.title + ' thumbnail'">
+      </div>
       <div class="post-content">
         <h2>{{ post.title }}</h2>
         <p>{{ post.description }}</p>
-        <!-- Add date/author/read time if available in index.json -->
-      </div>
-      <div *ngIf="post.thumbnail" class="post-thumbnail">
-        <img [src]="post.thumbnail" [alt]="post.title + ' thumbnail'">
+        <div class="post-meta">
+          <span class="category" (click)="$event.preventDefault(); onCategoryChipClick(post.category)">{{ post.category }}</span>
+          <span class="date">{{ post.publishedDate | date:'mediumDate' }}</span>
+          <div class="tags">
+            <mat-chip-listbox>
+              <mat-chip-option *ngFor="let tag of post.tags" 
+                            (click)="$event.preventDefault(); onTagChipClick(tag)">
+                {{ tag }}
+              </mat-chip-option>
+            </mat-chip-listbox>
+          </div>
+        </div>
       </div>
     </a>
   </div>

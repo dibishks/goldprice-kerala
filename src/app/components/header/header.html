@@ -1,1 +1,64 @@
-<p>header works!</p>
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a routerLink="/">
+        <img src="assets/images/logo.png" alt="GoldPrice Kerala Logo" class="logo-image">
+        <span>GoldPrice Kerala</span>
+      </a>
+    </div>
+
+    <nav [class.active]="isMobileMenuOpen" class="main-nav">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a routerLink="/" (click)="closeMobileMenu()">Home</a>
+        </li>
+
+        <li class="nav-item has-dropdown" (mouseenter)="openDropdown('jewellery')" (mouseleave)="closeDropdown('jewellery')">
+          <a href="javascript:void(0)" (click)="toggleDropdown('jewellery')">Jewellery <i class="material-icons">arrow_drop_down</i></a>
+          <ul class="dropdown-menu" [class.active]="activeDropdown === 'jewellery'">
+            <li><a routerLink="/jewellery/pendants" (click)="closeMobileMenu()">Pendants</a></li>
+            <li><a routerLink="/jewellery/necklaces" (click)="closeMobileMenu()">Necklaces</a></li>
+            <li><a routerLink="/jewellery/earrings" (click)="closeMobileMenu()">Earrings</a></li>
+            <li><a routerLink="/jewellery/rings" (click)="closeMobileMenu()">Rings</a></li>
+            <li><a routerLink="/jewellery/bangles" (click)="closeMobileMenu()">Bangles</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-dropdown" (mouseenter)="openDropdown('priceCharts')" (mouseleave)="closeDropdown('priceCharts')">
+          <a href="javascript:void(0)" (click)="toggleDropdown('priceCharts')">Price Charts <i class="material-icons">arrow_drop_down</i></a>
+          <ul class="dropdown-menu" [class.active]="activeDropdown === 'priceCharts'">
+            <li><a routerLink="/price-charts/daily" (click)="closeMobileMenu()">Daily Price Chart</a></li>
+            <li><a routerLink="/price-charts/monthly" (click)="closeMobileMenu()">Monthly Price Chart</a></li>
+            <li><a routerLink="/price-charts/yearly" (click)="closeMobileMenu()">Yearly Price Chart</a></li>
+            <li><a routerLink="/price-charts/24-hour" (click)="closeMobileMenu()">24 Hour Gold Price</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item has-dropdown" (mouseenter)="openDropdown('metals')" (mouseleave)="closeDropdown('metals')">
+          <a href="javascript:void(0)" (click)="toggleDropdown('metals')">Metals <i class="material-icons">arrow_drop_down</i></a>
+          <ul class="dropdown-menu" [class.active]="activeDropdown === 'metals'">
+            <li><a routerLink="/metals/gold" (click)="closeMobileMenu()">Gold</a></li>
+            <li><a routerLink="/metals/diamond" (click)="closeMobileMenu()">Diamond</a></li>
+            <li><a routerLink="/metals/silver" (click)="closeMobileMenu()">Silver</a></li>
+            <li><a routerLink="/metals/platinum" (click)="closeMobileMenu()">Platinum</a></li>
+            <li><a routerLink="/metals/gemstone" (click)="closeMobileMenu()">Gemstone</a></li>
+            <li><a routerLink="/metals/white-gold" (click)="closeMobileMenu()">White Gold</a></li>
+            <li><a routerLink="/metals/rose-gold" (click)="closeMobileMenu()">Rose Gold</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/blog" (click)="closeMobileMenu()">Blog</a>
+        </li>
+
+        <li class="nav-item">
+          <a routerLink="/about-us" (click)="closeMobileMenu()">About Us</a>
+        </li>
+      </ul>
+    </nav>
+
+    <button class="hamburger-menu" (click)="toggleMobileMenu()">
+      <i class="material-icons">{{ isMobileMenuOpen ? 'close' : 'menu' }}</i>
+    </button>
+  </div>
+</header>

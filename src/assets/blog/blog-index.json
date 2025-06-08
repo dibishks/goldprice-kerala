@@ -3,108 +3,162 @@
       "id": "gold-investment-strategies",
       "title": "Smart Gold Investment Strategies & Market Trends",
       "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
-      "thumbnail": "/assets/blog/thumbnails/post1-thumb.png"
+      "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+      "category": "Investment",
+      "tags": ["gold", "investment", "market trends"],
+      "publishedDate": "2024-01-15"
     },
     {
       "id": "gold-jewellery-tips",
       "title": "Tips for Buying Gold Jewellery & Understanding Hallmarking",
-      "description": "Planning to buy gold jewellery? Here’s a quick guide to avoid common....",
-      "thumbnail": "/assets/blog/thumbnails/post2-thumb.png"
+      "description": "Planning to buy gold jewellery? Here's a quick guide to avoid common....",
+      "thumbnail": "/assets/blog/thumbnails/post2-thumb.png",
+      "category": "Jewellery",
+      "tags": ["jewellery", "hallmarking", "buying guide"],
+      "publishedDate": "2024-02-20"
     },
     {
       "id": "kerala-traditions",
       "title": "The Cultural Significance of Gold in Kerala",
-      "description": "Gold is more than just metal in Kerala – it’s emotion, tradition, and identity....",
-      "thumbnail": "/assets/blog/thumbnails/post3-thumb.png"
+      "description": "Gold is more than just metal in Kerala – it's emotion, tradition, and identity....",
+      "thumbnail": "/assets/blog/thumbnails/post3-thumb.png",
+      "category": "Culture",
+      "tags": ["kerala", "tradition", "culture", "gold"],
+      "publishedDate": "2024-03-10"
     },
     {
         "id": "gold-investment-strategies",
         "title": "Smart Gold Investment Strategies & Market Trends",
         "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
-        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png"
+        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+        "category": "Investment",
+        "tags": ["gold", "investment", "market trends"],
+        "publishedDate": "2024-01-15"
       },
       {
         "id": "gold-jewellery-tips",
         "title": "Tips for Buying Gold Jewellery & Understanding Hallmarking",
-        "description": "Planning to buy gold jewellery? Here’s a quick guide to avoid common....",
-        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png"
+        "description": "Planning to buy gold jewellery? Here's a quick guide to avoid common....",
+        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png",
+        "category": "Jewellery",
+        "tags": ["jewellery", "hallmarking", "buying guide"],
+        "publishedDate": "2024-02-20"
       },
       {
         "id": "kerala-traditions",
         "title": "The Cultural Significance of Gold in Kerala",
-        "description": "Gold is more than just metal in Kerala – it’s emotion, tradition, and identity....",
-        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png"
+        "description": "Gold is more than just metal in Kerala – it's emotion, tradition, and identity....",
+        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png",
+        "category": "Culture",
+        "tags": ["kerala", "tradition", "culture", "gold"],
+        "publishedDate": "2024-03-10"
       },
       {
         "id": "gold-investment-strategies",
         "title": "Smart Gold Investment Strategies & Market Trends",
         "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
-        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png"
+        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+        "category": "Investment",
+        "tags": ["gold", "investment", "market trends"],
+        "publishedDate": "2024-01-15"
       },
       {
         "id": "gold-jewellery-tips",
         "title": "Tips for Buying Gold Jewellery & Understanding Hallmarking",
-        "description": "Planning to buy gold jewellery? Here’s a quick guide to avoid common....",
-        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png"
+        "description": "Planning to buy gold jewellery? Here's a quick guide to avoid common....",
+        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png",
+        "category": "Jewellery",
+        "tags": ["jewellery", "hallmarking", "buying guide"],
+        "publishedDate": "2024-02-20"
       },
       {
         "id": "kerala-traditions",
         "title": "The Cultural Significance of Gold in Kerala",
-        "description": "Gold is more than just metal in Kerala – it’s emotion, tradition, and identity....",
-        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png"
+        "description": "Gold is more than just metal in Kerala – it's emotion, tradition, and identity....",
+        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png",
+        "category": "Culture",
+        "tags": ["kerala", "tradition", "culture", "gold"],
+        "publishedDate": "2024-03-10"
       },
       {
         "id": "gold-investment-strategies",
         "title": "Smart Gold Investment Strategies & Market Trends",
         "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
-        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png"
+        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+        "category": "Investment",
+        "tags": ["gold", "investment", "market trends"],
+        "publishedDate": "2024-01-15"
       },
       {
         "id": "gold-jewellery-tips",
         "title": "Tips for Buying Gold Jewellery & Understanding Hallmarking",
-        "description": "Planning to buy gold jewellery? Here’s a quick guide to avoid common....",
-        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png"
+        "description": "Planning to buy gold jewellery? Here's a quick guide to avoid common....",
+        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png",
+        "category": "Jewellery",
+        "tags": ["jewellery", "hallmarking", "buying guide"],
+        "publishedDate": "2024-02-20"
       },
       {
         "id": "kerala-traditions",
         "title": "The Cultural Significance of Gold in Kerala",
-        "description": "Gold is more than just metal in Kerala – it’s emotion, tradition, and identity....",
-        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png"
+        "description": "Gold is more than just metal in Kerala – it's emotion, tradition, and identity....",
+        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png",
+        "category": "Culture",
+        "tags": ["kerala", "tradition", "culture", "gold"],
+        "publishedDate": "2024-03-10"
       },
       {
         "id": "gold-investment-strategies",
         "title": "Smart Gold Investment Strategies & Market Trends",
         "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
-        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png"
+        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+        "category": "Investment",
+        "tags": ["gold", "investment", "market trends"],
+        "publishedDate": "2024-01-15"
       },
       {
         "id": "gold-jewellery-tips",
         "title": "Tips for Buying Gold Jewellery & Understanding Hallmarking",
-        "description": "Planning to buy gold jewellery? Here’s a quick guide to avoid common....",
-        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png"
+        "description": "Planning to buy gold jewellery? Here's a quick guide to avoid common....",
+        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png",
+        "category": "Jewellery",
+        "tags": ["jewellery", "hallmarking", "buying guide"],
+        "publishedDate": "2024-02-20"
       },
       {
         "id": "kerala-traditions",
         "title": "The Cultural Significance of Gold in Kerala",
-        "description": "Gold is more than just metal in Kerala – it’s emotion, tradition, and identity....",
-        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png"
+        "description": "Gold is more than just metal in Kerala – it's emotion, tradition, and identity....",
+        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png",
+        "category": "Culture",
+        "tags": ["kerala", "tradition", "culture", "gold"],
+        "publishedDate": "2024-03-10"
       },
       {
         "id": "gold-investment-strategies",
         "title": "Smart Gold Investment Strategies & Market Trends",
         "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
-        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png"
+        "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+        "category": "Investment",
+        "tags": ["gold", "investment", "market trends"],
+        "publishedDate": "2024-01-15"
       },
       {
         "id": "gold-jewellery-tips",
         "title": "Tips for Buying Gold Jewellery & Understanding Hallmarking",
-        "description": "Planning to buy gold jewellery? Here’s a quick guide to avoid common....",
-        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png"
+        "description": "Planning to buy gold jewellery? Here's a quick guide to avoid common....",
+        "thumbnail": "/assets/blog/thumbnails/post2-thumb.png",
+        "category": "Jewellery",
+        "tags": ["jewellery", "hallmarking", "buying guide"],
+        "publishedDate": "2024-02-20"
       },
       {
         "id": "kerala-traditions",
         "title": "The Cultural Significance of Gold in Kerala",
-        "description": "Gold is more than just metal in Kerala – it’s emotion, tradition, and identity....",
-        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png"
+        "description": "Gold is more than just metal in Kerala – it's emotion, tradition, and identity....",
+        "thumbnail": "/assets/blog/thumbnails/post3-thumb.png",
+        "category": "Culture",
+        "tags": ["kerala", "tradition", "culture", "gold"],
+        "publishedDate": "2024-03-10"
       }
   ]
