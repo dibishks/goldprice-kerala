@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { marked } from 'marked';
+import { marked, Renderer, Tokens } from 'marked';
 import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule } from '@angular/common';
+
+// Custom Marked renderer to open links in new tabs
+const renderer = new Renderer();
+const originalLinkRenderer = renderer.link;
+
+// The signature of the link method in marked is `(token: Tokens.Link) => string`
+renderer.link = (token: Tokens.Link): string => {
+  // Pass the entire token object to the original renderer's call method
+  const html = originalLinkRenderer.call(renderer, token);
+  return html.replace(/^<a /, '<a target="_blank" rel="noopener noreferrer" ');
+};
 
 interface BlogPost {
   id: string;
@@ -40,7 +51,8 @@ export class BlogViewerComponent implements OnInit {
 
   loadMarkdown(path: string): void {
     this.http.get(path, { responseType: 'text' }).subscribe((data) => {
-      const result = marked.parse(data);
+      // Use the custom renderer when parsing Markdown
+      const result = marked.parse(data, { renderer: renderer });
       if (result instanceof Promise) {
         result.then((html) => (this.blogContent = html));
       } else {

@@ -39,7 +39,7 @@
 }
 
 .blog-content p {
-  margin-bottom: 1em;
+  margin-bottom: 1.5em; /* Increased margin for more space after paragraphs */
   line-height: 1.6;
 }
 

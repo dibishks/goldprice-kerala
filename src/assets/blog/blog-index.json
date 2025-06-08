@@ -1,5 +1,14 @@
 [
-    {
+  {
+    "id": "10-most-popular-jewellery-websites-in-india",
+    "title": "💍10 Most Popular Jewellery Websites in India",
+    "description": "Jewellery in India is not just fashion. It is tradition, identity, and sometimes even investment. With the gold price in Kerala being closely watched by buyers",
+    "thumbnail": "/assets/blog/thumbnails/post1-thumb.png",
+    "category": "Jewellery",
+    "tags": ["gold", "investment", "market trends"],
+    "publishedDate": "2025-06-09"
+  },  
+  {
       "id": "gold-investment-strategies",
       "title": "Smart Gold Investment Strategies & Market Trends",
       "description": "Gold has always been a trusted investment in India. But how can you make the most out of it? Let's break it down....",
