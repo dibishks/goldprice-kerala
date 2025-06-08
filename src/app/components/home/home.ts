@@ -38,6 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     priceHistory: false,
     dailyPrices: false,
   };
+  private displayedChartHistory: GoldPrice[] = [];
 
   // Jewellery Price Calculator properties
   jewelleryGramValue: number | null = null;
@@ -123,6 +124,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
       .filter((price) => price !== undefined);
     const minPrice = Math.min(...prices);
     const maxPrice = Math.max(...prices);
+
+    this.displayedChartHistory = historyToDisplay; // Store the 7 days of data that are actually displayed
 
     // Create bar chart data with custom colors for 8 gram
     const series = historyToDisplay.map((item) => {
@@ -298,12 +301,12 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
       // Only show tooltip if mouse is within the chart container
       if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-        // Find the closest bar
-        const barWidth = this.chartWidth / this.monthlyHistory.length;
+        // Find the closest bar using the displayedChartHistory length
+        const barWidth = this.chartWidth / this.displayedChartHistory.length;
         const barIndex = Math.floor(x / barWidth);
 
-        if (barIndex >= 0 && barIndex < this.monthlyHistory.length) {
-          const data = this.monthlyHistory[barIndex];
+        if (barIndex >= 0 && barIndex < this.displayedChartHistory.length) {
+          const data = this.displayedChartHistory[barIndex]; // Use displayedChartHistory for tooltip data
           this.showTooltip = true;
           this.tooltipContent = `${data.date.toLocaleString('en-US', {
             month: 'short',
