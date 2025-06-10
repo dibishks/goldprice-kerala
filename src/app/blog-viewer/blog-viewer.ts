@@ -108,4 +108,12 @@ export class BlogViewerComponent implements OnInit {
     window.open(facebookShareUrl, '_blank');
     this.showSharePopup = false;
   }
+
+  shareOnWhatsapp(): void {
+    const currentUrl = window.location.href;
+    // WhatsApp Web URL for sharing. For mobile, it might try to open the app.
+    const whatsappShareUrl = `https://wa.me/?text=${encodeURIComponent(currentUrl)}`;
+    window.open(whatsappShareUrl, '_blank');
+    this.showSharePopup = false;
+  }
 }

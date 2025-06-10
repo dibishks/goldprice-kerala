@@ -1,8 +1,9 @@
 <div class="blog-viewer-container">
-  <h1>{{ blogDetails?.title }}</h1>
-  <div class="blog-meta">
+  <img *ngIf="blogDetails?.thumbnail" [src]="blogDetails?.thumbnail" alt="{{ blogDetails?.title }} Banner" class="blog-banner-image">
+  <h1 *ngIf="blogDetails">{{ blogDetails.title }}</h1>
+  <div class="blog-meta" *ngIf="blogDetails">
     <div class="meta-left">
-      <span class="published-date">{{ blogDetails?.publishedDate | date:'mediumDate' }}</span>
+      <span class="published-date">{{ blogDetails.publishedDate | date:'mediumDate' }}</span>
       <span class="read-time">5 min read</span>
     </div>
     <div class="meta-right">
@@ -22,12 +23,13 @@
           <li (click)="copyLink()"><i class="material-icons">content_copy</i> Copy Link</li>
           <li (click)="shareOnInstagram()"><i class="material-icons">photo_camera</i> Share to Instagram</li>
           <li (click)="shareOnFacebook()"><i class="material-icons">facebook</i> Share to Facebook</li>
+          <li (click)="shareOnWhatsapp()"><i class="material-icons">textsms</i> Share on Whatsapp</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <div class="blog-content" [innerHTML]="blogContent"></div>
+  <div class="blog-content markdown-body" [innerHTML]="blogContent"></div>
 
   <div class="blog-tags-section" *ngIf="blogTags && blogTags.length > 0">
     <h3>Tags:</h3>

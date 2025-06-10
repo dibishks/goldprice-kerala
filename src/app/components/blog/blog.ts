@@ -27,7 +27,7 @@ interface BlogPost {
 export class BlogComponent implements OnInit {
   allBlogPosts: BlogPost[] = [];
   displayBlogPosts: BlogPost[] = [];
-  postsPerPage = 5;
+  postsPerPage = 10;
   currentPage = 0;
   isLoading = false;
   indexFilePath = '/assets/blog/blog-index.json';
@@ -60,7 +60,7 @@ export class BlogComponent implements OnInit {
           this.currentPage = 0; // Reset pagination for initial filter
           this.displayBlogPosts = []; // Clear current displayed posts
           console.log('Applying filters with selectedTag:', this.selectedTag, 'selectedCategory:', this.selectedCategory, 'currentPage:', this.currentPage); // Debugging log
-          this.applyFilters(); // Apply filters based on URL or no filter
+          this.updateDisplayedPosts(true); // Apply filters based on URL or no filter
           console.log('Display Blog Posts after applyFilters:', this.displayBlogPosts); // Debugging log
           this.isLoading = false; // Set loading to false after initial posts are displayed
         });
@@ -81,7 +81,7 @@ export class BlogComponent implements OnInit {
     this.isLoading = true;
     this.currentPage++;
     console.log('Loading more posts. Current Page:', this.currentPage); // Debugging log
-    this.applyFilters();
+    this.updateDisplayedPosts(false);
     console.log('Display Blog Posts after loadMorePosts:', this.displayBlogPosts); // Debugging log
     this.isLoading = false;
   }
@@ -104,26 +104,19 @@ export class BlogComponent implements OnInit {
     return filtered;
   }
 
-  applyFilters(): void {
+  updateDisplayedPosts(reset: boolean): void {
     const filteredPosts = this.getFilteredPosts();
-    console.log('Inside applyFilters. Filtered Posts count:', filteredPosts.length); // Debugging log
-    console.log('Inside applyFilters. Current displayBlogPosts length (before slice):', this.displayBlogPosts.length); // Debugging log
-    const startIndex = (this.currentPage > 0 ? this.currentPage - 1 : 0) * this.postsPerPage;
+    const startIndex = this.currentPage * this.postsPerPage;
     const endIndex = startIndex + this.postsPerPage;
 
-    // If filtering by category or tag, reset display posts and load first page
-    if (this.selectedCategory !== null || this.selectedTag !== null) {
-      console.log('Applying category or tag filter.'); // Debugging log
-      this.displayBlogPosts = filteredPosts.slice(0, this.postsPerPage);
-      this.currentPage = 1; // Reset to first page after applying filters
+    if (reset) {
+      this.displayBlogPosts = filteredPosts.slice(startIndex, endIndex);
     } else {
-      // For initial load or load more when no filters are active
-      console.log('Applying initial load or load more (no active filters).'); // Debugging log
       const newPosts = filteredPosts.slice(startIndex, endIndex);
-      console.log('New posts to add:', newPosts.length); // Debugging log
       this.displayBlogPosts = [...this.displayBlogPosts, ...newPosts];
     }
-    console.log('Final displayBlogPosts length after applyFilters:', this.displayBlogPosts.length); // Debugging log
+    this.isLoading = false; // Moved here as posts are now displayed
+    console.log('Final displayBlogPosts length after updateDisplayedPosts:', this.displayBlogPosts.length); // Debugging log
   }
 
   filterByCategory(category: string | null): void {
@@ -132,7 +125,7 @@ export class BlogComponent implements OnInit {
     this.currentPage = 0;
     this.displayBlogPosts = [];
     console.log('filterByCategory called. category:', category); // Debugging log
-    this.applyFilters();
+    this.updateDisplayedPosts(true);
   }
 
   filterByTag(tag: string | null): void {
@@ -141,7 +134,7 @@ export class BlogComponent implements OnInit {
     this.currentPage = 0;
     this.displayBlogPosts = [];
     console.log('filterByTag called. tag:', tag); // Debugging log
-    this.applyFilters();
+    this.updateDisplayedPosts(true);
   }
 
   extractUniqueCategoriesAndTags(): void {

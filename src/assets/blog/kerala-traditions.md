@@ -1,5 +1,3 @@
-# The Cultural Significance of Gold in Kerala ✨
-
 Gold is more than just metal in Kerala – it’s emotion, tradition, and identity.
 
 ## 🎉 Gold in Celebrations

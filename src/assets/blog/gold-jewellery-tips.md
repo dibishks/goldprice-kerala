@@ -1,5 +1,3 @@
-# Tips for Buying Gold Jewellery & Understanding Hallmarking 👑
-
 Planning to buy gold jewellery? Here’s a quick guide to avoid common mistakes.
 
 ## ✅ Must-Check Before You Buy
