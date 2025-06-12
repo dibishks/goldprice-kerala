@@ -4,6 +4,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { LiveGoldChartComponent } from './components/live-gold-chart/live-gold-chart.component';
 
 export const appConfig: ApplicationConfig = {
   providers: [

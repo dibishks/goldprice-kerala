@@ -1,70 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about',
   standalone: true,
   imports: [CommonModule, MatCardModule],
-  template: `
-    <div class="about-container">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>About Gold Price Kerala</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            Gold Price Kerala is your trusted source for real-time gold prices in Kerala, India.
-            We provide accurate and up-to-date information about gold prices, helping you make
-            informed decisions about your gold investments.
-          </p>
-          <h3>Our Mission</h3>
-          <p>
-            Our mission is to provide transparent and reliable gold price information to the
-            people of Kerala, making it easier for them to track and understand gold market
-            trends.
-          </p>
-          <h3>What We Offer</h3>
-          <ul>
-            <li>Live gold prices for 22K and 24K gold</li>
-            <li>Historical price data and trends</li>
-            <li>Daily price updates and analysis</li>
-            <li>Price predictions and market insights</li>
-          </ul>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  `,
-  styles: [`
-    .about-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
-
-    mat-card {
-      margin-bottom: 2rem;
-    }
-
-    h3 {
-      margin: 1.5rem 0 1rem;
-      color: #333;
-    }
-
-    p {
-      line-height: 1.6;
-      color: #666;
-    }
-
-    ul {
-      list-style-type: disc;
-      padding-left: 2rem;
-      color: #666;
-      
-      li {
-        margin: 0.5rem 0;
-      }
-    }
-  `]
+  templateUrl: './about.html',
+  styleUrls: ['./about.scss']
 })
-export class AboutComponent {}
+export class AboutComponent implements OnInit {
+
+  constructor(private meta: Meta, private title: Title) { }
+
+  ngOnInit(): void {
+    this.title.setTitle('About Gold Price Kerala – Your Trusted Gold Rate Source');
+    this.meta.addTags([
+      { name: 'description', content: 'Learn more about Gold Price Kerala – your trusted source for daily 22K and 24K gold rates in Kerala, India. Discover our mission, what we offer, and how we help you track gold market trends.' },
+      { name: 'keywords', content: 'about Gold Price Kerala, gold rate source, trusted gold prices, Kerala gold market, gold investment information' },
+      { name: 'author', content: 'goldpricekerala.in' },
+      { name: 'robots', content: 'index, follow' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    ]);
+  }
+}

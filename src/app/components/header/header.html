@@ -27,6 +27,7 @@
         <li class="nav-item has-dropdown" (mouseenter)="openDropdown('priceCharts')" (mouseleave)="closeDropdown('priceCharts')">
           <a href="javascript:void(0)" (click)="toggleDropdown('priceCharts')">Price Charts <i class="material-icons">arrow_drop_down</i></a>
           <ul class="dropdown-menu" [class.active]="activeDropdown === 'priceCharts'">
+            <li><a routerLink="/price-charts/live-gold-chart" (click)="closeMobileMenu()">Live Gold Chart</a></li>
             <li><a routerLink="/price-charts/daily" (click)="closeMobileMenu()">Daily Price Chart</a></li>
             <li><a routerLink="/price-charts/monthly" (click)="closeMobileMenu()">Monthly Price Chart</a></li>
             <li><a routerLink="/price-charts/yearly" (click)="closeMobileMenu()">Yearly Price Chart</a></li>
@@ -52,7 +53,7 @@
         </li>
 
         <li class="nav-item">
-          <a routerLink="/about-us" (click)="closeMobileMenu()">About Us</a>
+          <a routerLink="/about" (click)="closeMobileMenu()">About Us</a>
         </li>
       </ul>
     </nav>
